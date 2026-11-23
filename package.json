@@ -1,0 +1,10 @@
+{
+  "name": "nutrite",
+  "version": "1.0.0",
+  "description": "Dietética online Nutrite - IEFI Aplicaciones Web 1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
