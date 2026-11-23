@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "nombre": "Galletitas de avena y miel sin TACC 200 g",
+    "categoria": "Snacks y galletitas",
+    "imagen": "assets/img/productos/galletitas-avena.svg",
+    "badges": ["Sin TACC"],
+    "stock": { "estado": "disponible", "texto": "En stock" },
+    "precio": 3200,
+    "cuotas": 1067,
+    "descripcion": "Galletitas crocantes de avena y miel, horneadas sin gluten. Ideales para la merienda o un snack liviano.",
+    "ingredientes": "Avena sin TACC, miel, aceite de girasol, polvo de hornear, sal."
+  },
+  {
+    "id": 2,
+    "nombre": "Harina de almendras 500 g",
+    "categoria": "Harinas y panificados",
+    "imagen": "assets/img/productos/harina-almendras.svg",
+    "badges": ["Sin TACC", "Vegano"],
+    "stock": { "estado": "ultimas", "texto": "¡Últimas 3 unidades!" },
+    "precio": 6800,
+    "cuotas": 2267,
+    "descripcion": "Harina de almendras blanqueadas, finamente molida. Ideal para budines, galletitas y masas sin gluten. Apta para dietas sin TACC, veganas y bajas en carbohidratos.",
+    "ingredientes": "100% almendras peladas. Elaborado en planta libre de gluten."
+  },
+  {
+    "id": 3,
+    "nombre": "Mix de frutos secos premium 250 g",
+    "categoria": "Frutos secos y semillas",
+    "imagen": "assets/img/productos/mix-frutos-secos.svg",
+    "badges": ["Vegano"],
+    "stock": { "estado": "disponible", "texto": "En stock" },
+    "precio": 4500,
+    "cuotas": 1500,
+    "descripcion": "Mezcla premium de nueces, almendras, castañas de cajú y pasas de uva. Energía natural para cualquier momento del día.",
+    "ingredientes": "Nueces, almendras, castañas de cajú, pasas de uva."
+  },
+  {
+    "id": 4,
+    "nombre": "Stevia líquida 100 ml",
+    "categoria": "Endulzantes naturales",
+    "imagen": "assets/img/productos/stevia-liquida.svg",
+    "badges": ["Sin azúcar", "Vegano"],
+    "stock": { "estado": "disponible", "texto": "En stock" },
+    "precio": 2900,
+    "cuotas": 967,
+    "descripcion": "Endulzante natural sin calorías a base de hojas de stevia. Rinde el equivalente a 100 cucharadas de azúcar.",
+    "ingredientes": "Extracto de stevia, agua purificada, conservante natural."
+  },
+  {
+    "id": 5,
+    "nombre": "Proteína vegana de arveja 1 kg",
+    "categoria": "Suplementos y vitaminas",
+    "imagen": "assets/img/productos/proteina-arveja.svg",
+    "badges": ["Vegano", "Sin azúcar"],
+    "stock": { "estado": "sin-stock", "texto": "Sin stock" },
+    "precio": 18500,
+    "cuotas": 6167,
+    "descripcion": "Proteína vegetal aislada de arveja, con alto aporte de aminoácidos. Se disuelve fácil en agua o bebidas vegetales.",
+    "ingredientes": "Proteína aislada de arveja (Pisum sativum). Sin aditivos."
+  },
+  {
+    "id": 6,
+    "nombre": "Bebida de almendras sin azúcar 1 L",
+    "categoria": "Bebidas",
+    "imagen": "assets/img/productos/bebida-almendras.svg",
+    "badges": ["Vegano", "Sin azúcar"],
+    "stock": { "estado": "disponible", "texto": "En stock" },
+    "precio": 2400,
+    "cuotas": 800,
+    "descripcion": "Bebida vegetal de almendras sin azúcar agregada, lista para tomar o cocinar. Alternativa liviana a la leche.",
+    "ingredientes": "Agua, almendras (7%), sal marina, estabilizante goma gellan."
+  },
+  {
+    "id": 7,
+    "nombre": "Pan integral de semillas 400 g",
+    "categoria": "Harinas y panificados",
+    "imagen": "assets/img/productos/pan-integral.svg",
+    "badges": ["Integral"],
+    "stock": { "estado": "ultimas", "texto": "¡Últimas 2 unidades!" },
+    "precio": 3900,
+    "cuotas": 1300,
+    "descripcion": "Pan de masa madre con harina integral y mezcla de semillas de girasol, lino y sésamo. Alto contenido de fibra.",
+    "ingredientes": "Harina integral, agua, semillas de girasol, lino y sésamo, masa madre, sal."
+  },
+  {
+    "id": 8,
+    "nombre": "Semillas de chía 500 g",
+    "categoria": "Frutos secos y semillas",
+    "imagen": "assets/img/productos/semillas-chia.svg",
+    "badges": ["Sin TACC", "Vegano"],
+    "stock": { "estado": "disponible", "texto": "En stock" },
+    "precio": 3100,
+    "cuotas": 1033,
+    "descripcion": "Semillas de chía seleccionadas, fuente natural de omega 3 y fibra. Se pueden hidratar o sumar a yogures y ensaladas.",
+    "ingredientes": "100% semillas de chía."
+  }
+]

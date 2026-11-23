@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de productos dietéticos con filtros sin TACC, vegano, sin azúcar e integral.">
+  <title>Tienda | Nutrite — Dietética Online</title>
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <div class="barra-promo">
+    Envío gratis en Córdoba Capital desde <span class="barra-promo__destacado">$40.000</span> · Hasta <span class="barra-promo__destacado">12 cuotas</span>
+  </div>
+
+  <header class="header">
+    <div class="header__contenido l-contenedor">
+      <input type="checkbox" id="menu-toggle" class="header__toggle-input">
+      <label for="menu-toggle" class="header__toggle" aria-label="Abrir menú">
+        <span class="header__toggle-linea"></span>
+        <span class="header__toggle-linea"></span>
+        <span class="header__toggle-linea"></span>
+      </label>
+
+      <a href="index.html" class="logo" aria-label="Nutrite - Inicio">
+        <img class="logo__imagen" src="assets/img/logo.svg" alt="">
+        <span class="logo__texto">nutrite</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <ul class="nav__lista">
+          <li class="nav__item"><a class="nav__link" href="index.html">Inicio</a></li>
+          <li class="nav__item"><a class="nav__link nav__link--activo" href="catalogo.html">Tienda</a></li>
+          <li class="nav__item"><a class="nav__link" href="carrito.html">Envíos</a></li>
+          <li class="nav__item"><a class="nav__link" href="blog.html">Blog</a></li>
+          <li class="nav__item"><a class="nav__link" href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <form class="buscador" action="catalogo.html" role="search" id="form-buscador">
+        <label for="buscar" class="u-visualmente-oculto">Buscar productos</label>
+        <input class="buscador__input" type="search" id="buscar" name="q" placeholder="Buscar sin TACC, chía, proteína...">
+        <button class="buscador__boton" type="submit" aria-label="Buscar">
+          <img class="buscador__icono" src="assets/img/iconos/buscar-blanco.svg" alt="">
+        </button>
+      </form>
+
+      <a href="carrito.html" class="carrito-icono" aria-label="Ver carrito (3 productos)">
+        <img class="carrito-icono__imagen" src="assets/img/iconos/carrito.svg" alt="">
+        <span class="carrito-icono__contador">3</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="l-contenedor">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <ol class="breadcrumb__lista"><li class="breadcrumb__item"><a class="breadcrumb__link" href="index.html">Inicio</a></li><li class="breadcrumb__item">Tienda</li></ol>
+      </nav>
+      <header class="catalogo__encabezado">
+        <h1>Todos los productos</h1>
+      </header>
+
+      <div class="catalogo">
+        <details class="filtros" open>
+          <summary class="filtros__resumen">Filtrar productos</summary>
+          <form class="filtros__cuerpo" id="form-filtros">
+            <fieldset class="filtros__grupo">
+              <legend class="filtros__titulo">Atributos</legend>
+              <label class="filtros__opcion"><input type="checkbox" name="attr" value="Sin TACC"> Sin TACC</label>
+              <label class="filtros__opcion"><input type="checkbox" name="attr" value="Vegano"> Vegano</label>
+              <label class="filtros__opcion"><input type="checkbox" name="attr" value="Sin azúcar"> Sin azúcar</label>
+              <label class="filtros__opcion"><input type="checkbox" name="attr" value="Integral"> Integral</label>
+            </fieldset>
+            <fieldset class="filtros__grupo">
+              <legend class="filtros__titulo">Categoría</legend>
+              <label class="filtros__opcion"><input type="checkbox" name="cat" value="Harinas y panificados"> Harinas y panificados</label>
+              <label class="filtros__opcion"><input type="checkbox" name="cat" value="Snacks y galletitas"> Snacks y galletitas</label>
+              <label class="filtros__opcion"><input type="checkbox" name="cat" value="Bebidas"> Bebidas</label>
+              <label class="filtros__opcion"><input type="checkbox" name="cat" value="Frutos secos y semillas"> Frutos secos y semillas</label>
+              <label class="filtros__opcion"><input type="checkbox" name="cat" value="Suplementos y vitaminas"> Suplementos y vitaminas</label>
+              <label class="filtros__opcion"><input type="checkbox" name="cat" value="Endulzantes naturales"> Endulzantes naturales</label>
+            </fieldset>
+            <fieldset class="filtros__grupo">
+              <legend class="filtros__titulo">Disponibilidad</legend>
+              <label class="filtros__opcion"><input type="checkbox" name="stock"> Solo con stock</label>
+            </fieldset>
+            <button type="reset" class="btn btn--secundario btn--chico" id="btn-limpiar-filtros">Limpiar filtros</button>
+          </form>
+        </details>
+
+        <section>
+          <div class="catalogo__barra">
+            <span class="catalogo__resultados">Mostrando <strong id="contador-resultados">0</strong> de <strong id="contador-total">0</strong> productos</span>
+            <label class="catalogo__orden">Ordenar:
+              <select class="campo__select" id="orden-select">
+                <option>Más vendidos</option><option>Menor precio</option><option>Mayor precio</option><option>Nombre A-Z</option>
+              </select>
+            </label>
+          </div>
+          <div class="l-grilla" id="grilla-productos">
+            <p class="catalogo__cargando">Cargando productos...</p>
+          </div>
+          <nav class="paginacion" aria-label="Paginación">
+            <a class="paginacion__link paginacion__link--activo" href="#">1</a>
+            <a class="paginacion__link" href="#">2</a>
+            <a class="paginacion__link" href="#">3</a>
+            <a class="paginacion__link" href="#">›</a>
+          </nav>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="l-contenedor">
+      <div class="footer__grilla">
+        <div class="footer__marca">
+          <a href="index.html" class="logo logo--footer">
+            <img class="logo__imagen" src="assets/img/logo.svg" alt="">
+            <span class="logo__texto logo__texto--claro">nutrite</span>
+          </a>
+          <p class="footer__descripcion">Dietética online de Córdoba. Productos naturales, sin TACC, veganos e integrales con envío a domicilio.</p>
+          <div class="footer__redes">
+            <a class="footer__red" href="https://www.instagram.com/nutrite_dieteticaonline" aria-label="Instagram"><img class="footer__red-icono" src="assets/img/iconos/camara-blanco.svg" alt=""></a>
+            <a class="footer__red" href="#" aria-label="WhatsApp"><img class="footer__red-icono" src="assets/img/iconos/chat-blanco.svg" alt=""></a>
+            <a class="footer__red" href="#" aria-label="Email"><img class="footer__red-icono" src="assets/img/iconos/mail-blanco.svg" alt=""></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__titulo">Tienda</h3>
+          <ul class="footer__lista">
+            <li><a class="footer__link" href="catalogo.html">Todos los productos</a></li>
+            <li><a class="footer__link" href="catalogo.html">Sin TACC</a></li>
+            <li><a class="footer__link" href="catalogo.html">Veganos</a></li>
+            <li><a class="footer__link" href="catalogo.html">Suplementos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__titulo">Ayuda</h3>
+          <ul class="footer__lista">
+            <li><a class="footer__link" href="carrito.html">Envíos y costos</a></li>
+            <li><a class="footer__link" href="contacto.html">Preguntas frecuentes</a></li>
+            <li><a class="footer__link" href="contacto.html">Contacto</a></li>
+            <li><a class="footer__link" href="#">Mi cuenta</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__titulo">Legales</h3>
+          <ul class="footer__lista">
+            <li><a class="footer__link" href="#">Términos y condiciones</a></li>
+            <li><a class="footer__link" href="#">Política de privacidad</a></li>
+            <li><a class="footer__link" href="#">Cambios y devoluciones</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer__legal">© 2026 Nutrite — Dietética Online · Córdoba, Argentina · www.nutrite.com.ar</p>
+    </div>
+  </footer>
+
+  <a class="whatsapp-flotante" href="#" aria-label="Consultar por WhatsApp">
+    <img class="whatsapp-flotante__icono" src="assets/img/iconos/chat-blanco.svg" alt="">
+    <span class="whatsapp-flotante__texto">¿Consultas? Escribinos</span>
+  </a>
+  <script src="assets/js/catalogo.js" type="module"></script>
+</body>
+</html>
