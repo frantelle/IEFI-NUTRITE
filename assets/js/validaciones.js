@@ -35,7 +35,9 @@ export function validarCampo(input, mensajeError, reglaExtra) {
     
     if (esValido && reglaExtra) {
         esValido = reglaExtra(valor);
-        return marcarCampo(input, esValido ? "" : mensajeError);
-    }
+      
+    }  
+    
+    return marcarCampo(input, esValido ? "" : mensajeError);
 }
 

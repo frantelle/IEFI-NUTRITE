@@ -17,7 +17,7 @@ function validar() {
   return !resultados.includes(false);
 }
 
-function inicializarEventos(){}
+function inicializarEventos(){
 
   // Evento: enviar el formulario
   form.addEventListener("submit", (evento) => {
