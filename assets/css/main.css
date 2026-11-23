@@ -515,6 +515,21 @@ strong { color: var(--color-texto); }
 }
 
 
+/* ---- 3. Componentes — aviso ---- */
+/* Bloque: aviso — notificación en la interfaz (ej.: pedido enviado) */
+.aviso {
+  margin: var(--esp-4) 0;
+  padding: var(--esp-4);
+  border-left: 4px solid var(--color-primario);
+  border-radius: var(--radio-sm);
+  background: var(--color-primario-claro);
+}
+.aviso--exito { border-left-color: #25d366; }
+.aviso__titulo { font-weight: 600; }
+.aviso__texto { margin: var(--esp-2) 0 var(--esp-3); }
+
+
+
 /* ---- 3. Componentes — badges ---- */
 /* Bloque: badge — etiquetas de atributos (sin TACC, vegano, etc.) */
 .badge {

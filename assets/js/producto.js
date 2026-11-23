@@ -4,10 +4,11 @@
 // carrito, calculadora de envío y WhatsApp.
 
 import { obtenerProductos } from "./datos.js";
-import { URL_PRODUCTOS } from "./config.js";
+import { URL_PRODUCTOS, NUMERO_WHATSAPP } from "./config.js";
 import { crearTarjetaProducto, formatearPrecio } from "./render.js";
 import { agregarAlCarrito, maximoStock } from "./funciones-carrito.js";
 import { actualizarContadorHeader, escucharBotonesAgregar } from "./agregar.js";
+import { crearLinkWhatsApp } from "./whatsapp.js";
 
 const BADGE_CLASES = {
   "Sin TACC": "badge--sin-tacc",
@@ -16,7 +17,6 @@ const BADGE_CLASES = {
   "Integral": "badge--integral",
 };
 
-const NUMERO_WHATSAPP = "5493510000000";
 
 const detalle = document.getElementById("detalle-producto");
 const migaCategoria = document.getElementById("miga-categoria");
@@ -159,8 +159,8 @@ function inicializarEventos(producto) {
   mostrarOpcionesEnvio(inputCp.value);
 
   // Evento: consulta por WhatsApp con el nombre del producto
-  const texto = encodeURIComponent(`Hola Nutrite! Quiero consultar por: ${producto.nombre}`);
-  document.getElementById("boton-whatsapp").href = `https://wa.me/${NUMERO_WHATSAPP}?text=${texto}`;
+  const texto = `Hola Nutrite! Quiero consultar por: ${producto.nombre}`;
+  document.getElementById("boton-whatsapp").href = crearLinkWhatsApp(NUMERO_WHATSAPP, texto);
 
   if (producto.stock.estado === "sin-stock") return;
 

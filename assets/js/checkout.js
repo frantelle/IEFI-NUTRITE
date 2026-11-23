@@ -1,5 +1,5 @@
 import { obtenerProductos } from './datos.js'
-import { URL_PRODUCTOS } from './config.js'
+import { URL_PRODUCTOS, NUMERO_WHATSAPP } from './config.js'
 import {
     envios,
     envioGratisDesde,
@@ -16,6 +16,7 @@ import {
     renderizadoCuotas
 } from './funciones-carrito.js'
 import {validarCampo, REGEX_EMAIL} from './validaciones.js' 
+import { armarMensajePedido, crearLinkWhatsApp } from './whatsapp.js'
 
 const carrito = leerCarrito()
 let productos = []
@@ -221,9 +222,8 @@ function escaparHtml(texto) {
     return div.innerHTML
 }
 
-function mostrarConfirmacion() {
-    const numeroPedido = 'NUT-' + Math.floor(100000 + Math.random() * 900000)
-    const totalFinal = calcularTotalFinal()
+// Arma un objeto con todos los datos del pedido (cliente, productos, entrega y pago)
+function armarPedido() {
     const nombresMedios = {
         credito: 'Tarjeta de crédito en ' + cuotasElegidas + ' cuota(s)',
         debito: 'Tarjeta de débito',
@@ -233,17 +233,49 @@ function mostrarConfirmacion() {
 
     let direccion = 'Retiro en punto Nutrite (Córdoba Capital)'
     if (leerEnvio() != 'retiro') {
-        direccion = escaparHtml(datosEntrega.calle + ', ' + datosEntrega.ciudad + ' (CP ' + datosEntrega.cp + ')')
+        direccion = datosEntrega.calle + ', ' + datosEntrega.ciudad + ' (CP ' + datosEntrega.cp + ')'
     }
 
+    const items = carrito.map((item) => {
+        const producto = buscarProducto(productos, item.id)
+        return {
+            nombre: producto.nombre,
+            cantidad: item.cantidad,
+            subtotal: producto.precio * item.cantidad
+        }
+    })
+
+    return {
+        numero: 'NUT-' + Math.floor(100000 + Math.random() * 900000),
+        cliente: datosCliente,
+        items: items,
+        entrega: envios[leerEnvio()].nombre,
+        direccion: direccion,
+        notas: datosEntrega.notas,
+        pago: nombresMedios[medioPago],
+        total: calcularTotalFinal()
+    }
+}
+
+function mostrarConfirmacion() {
+    const pedido = armarPedido()
+    const linkWhatsApp = crearLinkWhatsApp(NUMERO_WHATSAPP, armarMensajePedido(pedido))
+
+    // Envío del pedido: abre WhatsApp en otra pestaña con el mensaje ya escrito
+    window.open(linkWhatsApp, '_blank')
+
     paneles[3].innerHTML = `
-    <h1 class="checkout__titulo">¡Gracias por tu compra, ${escaparHtml(datosCliente.nombre.split(' ')[0])}!</h1>
-    <p>Tu pedido <strong>${numeroPedido}</strong> fue registrado. Te enviamos el detalle a <strong>${escaparHtml(datosCliente.email)}</strong>.</p>
+    <h1 class="checkout__titulo">¡Gracias por tu compra, ${escaparHtml(pedido.cliente.nombre.split(' ')[0])}!</h1>
+    <div class="aviso aviso--exito" role="status">
+        <p class="aviso__titulo">Tu pedido <strong>${pedido.numero}</strong> está listo para enviar</p>
+        <p class="aviso__texto">Abrimos WhatsApp con el detalle de tu compra. Tocá <strong>Enviar</strong> en el chat para confirmarlo.</p>
+        <a class="btn btn--whatsapp btn--chico" href="${linkWhatsApp}" target="_blank" rel="noopener">¿No se abrió? Enviar por WhatsApp</a>
+    </div>
     <div class="resumen u-mt-4">
-        <div class="resumen__linea"><span>Entrega</span><span>${envios[leerEnvio()].nombre}</span></div>
-        <div class="resumen__linea"><span>Dirección</span><span>${direccion}</span></div>
-        <div class="resumen__linea"><span>Pago</span><span>${nombresMedios[medioPago]}</span></div>
-        <div class="resumen__linea resumen__linea--total"><span>Total pagado</span><span>${formatearPrecio(totalFinal)}</span></div>
+        <div class="resumen__linea"><span>Entrega</span><span>${pedido.entrega}</span></div>
+        <div class="resumen__linea"><span>Dirección</span><span>${escaparHtml(pedido.direccion)}</span></div>
+        <div class="resumen__linea"><span>Pago</span><span>${pedido.pago}</span></div>
+        <div class="resumen__linea resumen__linea--total"><span>Total</span><span>${formatearPrecio(pedido.total)}</span></div>
     </div>
     <div class="checkout__navegacion">
         <a class="btn btn--secundario" href="index.html">Ir al inicio</a>
@@ -256,7 +288,6 @@ function mostrarConfirmacion() {
     contadorProductos.textContent = 0
     irAPaso(3)
 }
-
 // Eventos
 function inicializarEventos() {
     formDatos.addEventListener('submit', (evento) => {
@@ -338,12 +369,12 @@ async function iniciar() {
     } else {
         mostrarResumen()
     }
-} catch (error) {
+}   catch (error) {
     paneles.forEach((panel) => {
         panel.hidden = true
     })
     paneles[3].hidden = false
-    paneles[3].innerHTML = '<p class="catalogo__error">No se pudo cargar tu pedido.Por favor, intentá de nuevo más tarde.</p>'
+    paneles[3].innerHTML = '<p class="catalogo__error">No se pudo cargar tu pedido. Por favor, intentá de nuevo más tarde.</p>'
     resumenPedido.style.display = 'none'
     console.error(error)
     }

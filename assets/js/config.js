@@ -4,3 +4,5 @@
 
 export const URL_PRODUCTOS = "assets/data/productos.json";
 export const URL_ARTICULOS = "assets/data/articulos.json";
+//Numero de whatsapp de la tienda sin el 0 ni el 15, sin espacios ni signos.
+export const NUMERO_WHATSAPP = "5493704841732";
