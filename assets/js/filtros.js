@@ -2,7 +2,7 @@
 // de productos + los criterios elegidos, y devuelven una lista nueva.
 // No tocan el DOM ni saben que existen checkboxes: eso lo maneja catalogo.js.
 export function normalizarTexto(texto) {
-  return texto.normalize("NFD").replace(/[u0300-\u036f]/g, "").toLowerCase();
+  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 export function filtrarProductos(productos, { atributos, categorias, soloConStock, busqueda }) {
   return productos.filter((producto) => {

@@ -2,7 +2,7 @@ import { obtenerProductos } from './datos.js'
 import { URL_PRODUCTOS } from './config.js'
 import {
     envios,
-    enviosGratisDesde,
+    envioGratisDesde,
     planesCuotas,
     formatearPrecio,
     leerCarrito,
@@ -206,7 +206,7 @@ function mostrarOpcionesEntrega() {
     Object.keys(envios).forEach((clave) => {
         const envio = envios[clave]
         let textoPrecio = formatearPrecio(envio.precio)
-        if (envio.precio == 0 || subtotal >= enviosGratisDesde) {
+        if (envio.precio == 0 || subtotal >= envioGratisDesde) {
             textoPrecio = 'Gratis'
         }
         let marcado = ''
