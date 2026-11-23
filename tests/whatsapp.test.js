@@ -6,7 +6,7 @@ import { crearLinkWhatsApp, armarMensajePedido } from "../assets/js/whatsapp.js"
 
 const pedido = {
   numero: "NUT-123456",
-  cliente: { nombre: "Franco Tellechea", telefono: "3511234567", email: "franco@test.com" },
+ cliente: { nombre: "Cliente Prueba", telefono: "3510000000", email: "cliente@ejemplo.com" },
   items: [{ nombre: "Semillas de chía 500 g", cantidad: 2, subtotal: 6200 }],
   entrega: "Moto",
   direccion: "Av. Colón 1234, Córdoba (CP 5000)",
