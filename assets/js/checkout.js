@@ -15,6 +15,7 @@ import {
     contarProductos,
     renderizadoCuotas
 } from './funciones-carrito.js'
+import {validarCampo, REGEX_EMAIL} from './validaciones.js' 
 
 const carrito = leerCarrito()
 let productos = []
@@ -158,31 +159,14 @@ function irAPaso(numero) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-// Validaciones: marcan el campo con error y devuelven true/false
-function marcarCampo(input, mensaje) {
-    const campo = input.closest('.campo')
-    const ayuda = campo.querySelector('.campo__ayuda')
-    if (mensaje) {
-        campo.classList.add('campo--error')
-        ayuda.textContent = mensaje
-        return false
-    }
-    campo.classList.remove('campo--error')
-    if (input.name != 'telefono') {
-        ayuda.textContent = ''
-    } else {
-        ayuda.textContent = 'Solo números, con código de área.'
-    }
-    return true
-}
-
+// Validaciones de cada paso: usan validarCampo() de validaciones.js
 function validarDatos() {
     const f = formDatos.elements
     const resultados = [
-        marcarCampo(f.nombre, f.nombre.value.trim().length < 3 ? 'Ingresá tu nombre y apellido' : ''),
-        marcarCampo(f.email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()) ? 'Ingresá un email válido' : ''),
-        marcarCampo(f.telefono, !/^\d{8,12}$/.test(f.telefono.value.trim()) ? 'Ingresá entre 8 y 12 números' : ''),
-        marcarCampo(f.dni, !/^\d{7,8}$/.test(f.dni.value.trim()) ? 'Ingresá un DNI de 7 u 8 números' : '')
+        validarCampo(f.nombre, 'Ingresá tu nombre y apellido', (valor) => valor.length >= 3),
+        validarCampo(f.email, 'Ingresá un email válido', (valor) => REGEX_EMAIL.test(valor)),
+        validarCampo(f.telefono, 'Ingresá entre 8 y 12 números'),
+        validarCampo(f.dni, 'Ingresá un DNI de 7 u 8 números')
     ]
     return !resultados.includes(false)
 }
@@ -193,9 +177,9 @@ function validarEntrega() {
     }
     const f = formEntrega.elements
     const resultados = [
-        marcarCampo(f.calle, f.calle.value.trim().length < 3 ? 'Ingresá tu calle y número' : ''),
-        marcarCampo(f.ciudad, f.ciudad.value.trim().length < 2 ? 'Ingresá tu ciudad' : ''),
-        marcarCampo(f.cp, !/^\d{4}$/.test(f.cp.value.trim()) ? 'Ingresá un código postal de 4 números' : '')
+        validarCampo(f.calle, 'Ingresá tu calle y número', (valor) => valor.length >= 3),
+        validarCampo(f.ciudad, 'Ingresá tu ciudad', (valor) => valor.length >= 2),
+        validarCampo(f.cp, 'Ingresá un código postal de 4 números')
     ]
     return !resultados.includes(false)
 }
