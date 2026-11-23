@@ -2,6 +2,7 @@ import { obtenerProductos } from './datos.js'
 import { URL_PRODUCTOS } from './config.js'
 import {
     envios,
+    enviosGratisDesde,
     planesCuotas,
     formatearPrecio,
     leerCarrito,
@@ -205,7 +206,7 @@ function mostrarOpcionesEntrega() {
     Object.keys(envios).forEach((clave) => {
         const envio = envios[clave]
         let textoPrecio = formatearPrecio(envio.precio)
-        if (envio.precio == 0 || subtotal >= 40000) {
+        if (envio.precio == 0 || subtotal >= enviosGratisDesde) {
             textoPrecio = 'Gratis'
         }
         let marcado = ''
@@ -342,6 +343,7 @@ function mostrarCarritoVacio() {
 }
 
 async function iniciar() {
+    try {
     productos = await obtenerProductos(URL_PRODUCTOS)
     subtotal = calcularSubtotal(carrito, productos)
     contadorProductos.textContent = contarProductos(carrito)
@@ -352,6 +354,14 @@ async function iniciar() {
     } else {
         mostrarResumen()
     }
+} catch (error) {
+    paneles.forEach((panel) => {
+        panel.hidden = true
+    })
+    paneles[3].hidden = false
+    paneles[3].innerHTML = '<p class="catalogo__error">No se pudo cargar tu pedido.Por favor, intentá de nuevo más tarde.</p>'
+    resumenPedido.style.display = 'none'
+    console.error(error)
+    }
 }
-
 iniciar()

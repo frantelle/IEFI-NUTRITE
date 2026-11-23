@@ -172,9 +172,14 @@ function inicializarEventos() {
 }
 
 async function iniciar() {
-    productos = await obtenerProductos(URL_PRODUCTOS)
-    inicializarEventos()
-    actualizarCarrito()
+    try {
+        productos = await obtenerProductos(URL_PRODUCTOS)
+        inicializarEventos()
+        actualizarCarrito()
+    } catch (error) {
+        contenedorCarrito.innerHTML = '<li class="carrito__error">Error al cargar los productos. Por favor, recargá la página.</li>'
+        console.error('Error al obtener los productos:', error)
+    }
 }
 
 iniciar()

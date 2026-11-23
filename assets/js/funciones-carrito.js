@@ -20,15 +20,16 @@ function formatearPrecio(numero) {
 function leerCarrito() {
     const carritoGuardado = localStorage.getItem('carrito')
     if (carritoGuardado == null) {
-        const carritoEjemplo = [
-            { id: 2, cantidad: 2 },
-            { id: 8, cantidad: 1 },
-            { id: 4, cantidad: 1 }
-        ]
-        guardarCarrito(carritoEjemplo)
-        return carritoEjemplo
+       return []
     }
-    return JSON.parse(carritoGuardado)
+    try {
+        return JSON.parse(carritoGuardado)
+    } catch (error) {
+        console.error('El carrito guardado está dañado, se reiniciará.', error)
+        guardarCarrito([])
+        return []
+    }
+
 }
 
 function guardarCarrito(carrito) {

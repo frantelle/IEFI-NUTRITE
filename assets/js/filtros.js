@@ -1,14 +1,16 @@
 // Módulo de filtros: funciones puras que reciben la lista completa
 // de productos + los criterios elegidos, y devuelven una lista nueva.
 // No tocan el DOM ni saben que existen checkboxes: eso lo maneja catalogo.js.
-
+export function normalizarTexto(texto) {
+  return texto.normalize("NFD").replace(/[u0300-\u036f]/g, "").toLowerCase();
+}
 export function filtrarProductos(productos, { atributos, categorias, soloConStock, busqueda }) {
   return productos.filter((producto) => {
     const cumpleAtributos = atributos.every((attr) => producto.badges.includes(attr));
     const cumpleCategoria = categorias.length === 0 || categorias.includes(producto.categoria);
     const cumpleStock = !soloConStock || producto.stock.estado !== "sin-stock";
     const cumpleBusqueda =
-      !busqueda || producto.nombre.toLowerCase().includes(busqueda.toLowerCase());
+      !busqueda || normalizarTexto(producto.nombre).includes(normalizarTexto(busqueda));
 
     return cumpleAtributos && cumpleCategoria && cumpleStock && cumpleBusqueda;
   });
